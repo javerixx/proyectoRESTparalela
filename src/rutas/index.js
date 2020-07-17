@@ -9,12 +9,27 @@ const carreras = require('../carreras.json');
 
 //rutas de la aplicación
 rutas.get('/', (req, res) => {
-    req.params(name, tipomime, context);
-    // Nombre del archivo, tipo mime del archivo y contenido del archivo
-    for(var i = 0; i<28; i++){
-        console.log(carreras[i].nombre_carrera);
+    try{
+        res.status(200).json(carreras);
     }
-    res.json(carreras);
+    catch{
+        res.status(412).json(({error: 'No se encontró.'}));
+    }
+});
+
+rutas.get('/:codigo', (req, res) => {
+    const {codigo} = req.params;
+    if(codigo){
+        for(var i = 0; i<28; i++){
+            if(codigo == carreras[i].codigo){
+                res.status(200).json(carreras[i]);
+            }
+        }
+        res.status(400).json(({error: 'Dato ingresado no valido.'}));
+    }
+    else{
+        res.status(404).json(({error: 'No se encontró el contenido ingresado.'}));
+    }
 });
 
 module.exports = rutas;
