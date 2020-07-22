@@ -127,7 +127,7 @@ rutas.get('/filtro/:nombre', (req, res) => {
 });
 
 // Ruta correspondiente a las 10 mejores opciones de elegir sobre las carreras ofrecidas por la UTEM
-rutas.get('/mejoresopciones/', (req, res) => {
+rutas.post('/mejoresopciones/', (req, res) => {
     // Request body con datos necesarios
     var nem = req.body.nem;
     var ranking = req.body.ranking;
