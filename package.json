@@ -4,7 +4,7 @@
   "description": "Proyecto REST, simulador ingreso carreras UTEM",
   "main": "index.js",
   "scripts": {
-    "psu": "nodemon src/index.js"
+    "psu": "node src/index.js"
   },
   "repository": {
     "type": "git",
