@@ -6,6 +6,19 @@ const carreras = require('../carreras.json');
 
 //Funciones que se usan
 
+// 1) Funcion que permite limpiar el string, quitando las tildes y comillas
+function normalizeString(rawText) {
+    return rawText.normalize(`NFD`).replace(/[\u0300-\u036f]/g, ``);
+}
+
+// 2) Funcion que permite retornar el puntaje final que el estudiante obtuvo
+function calculoponderacion(nem, ranking, lenguaje, matematica, ciencia, historia, carrera){
+    let pnem = carrera.nem;
+    let pranking = carrera.ranking;
+    let plenguaje = carrera.lenguaje;
+    let pmatematica = carrera.matematica;
+}
+
 
 //Rutas de la aplicación
 
@@ -22,8 +35,11 @@ rutas.get('/', (req, res) => {
 // Para hacer pruebas de la sintaxis de js
 rutas.get('/prueba/', (req, res) => {
     let filtrocarrera = [];
+    let nombre = "Ingeniería"
+    let nombre_normalizado = normalizeString(nombre).toUpperCase();
     for(var i = 0; i<28; i++){
-        if(i===3 || i===5){
+        let nombre_carrera_normalizado = normalizeString(carreras[i].nombre_carrera).toUpperCase();
+        if(nombre_carrera_normalizado.includes(nombre_normalizado)){
             filtrocarrera.push(carreras[i]);
         }
     }
