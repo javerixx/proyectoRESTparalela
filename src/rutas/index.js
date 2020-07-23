@@ -1,6 +1,7 @@
+// Declaraciones de dependencias necesarias
 const { Router } = require('express');
 const rutas = Router();
-const carreras = require('../carreras.json');
+const carreras = require('../carreras.json'); // Archivo que contiene una lista de 28 carreras.
 
 //Funciones que se usan
 
@@ -65,19 +66,15 @@ function verificarpuntajes(nem, ranking, lenguaje, matematica, ciencia, historia
 
 //Rutas de la aplicación
 
-//Ruta que permite mostrar todas las carreras contenidas en el programa, a partir de "carreras.json".
-rutas.get('/', (req, res) => {
-    try{
-        res.status(200).json(carreras);
-    }
-    catch{
-        res.status(412).json(({error: 'Error inesperado.'}));
-    }
-});
-
-// Ruta que permite retornar los datos de una carrera a partir de su código como parámetro de entrada.
-rutas.get('/:codigo', (req, res) => {
-    const codigo = req.params.codigo; // Parametro necesario.
+/* URL: http://localhost:8085/carreras/
+   Método: GET
+   Datos de entrada por Query param: codigo
+   Ruta que permite retornar los datos de una carrera a partir de su código como query de entrada.
+   En caso de no tener ingresado, por defecto muesta todas las carreras contenidas en el programa.
+   Las carreras están a a partir de "carreras.json".
+*/
+rutas.get('/carreras/', (req, res) => {
+    var codigo = req.query.codigo; // Query Param necesario.
     if(codigo){ // Se verifica que el código exista.
         try{
             for(var i = 0; i<28; i++){ // Se recorre las 28 carreras para buscar el código
@@ -91,29 +88,36 @@ rutas.get('/:codigo', (req, res) => {
             res.status(412).json(({error: 'Error inesperado.'}));
         }
     }
-    else{
-        res.status(404).json(({error: 'No se encontró el parámetro requerido.'}));
+    else{ // Por defecto, se despliega todas las carreras existente
+        res.status(200).json(carreras);
     }
 });
 
-// Ruta correspondiente a filtro, que permite desplegar las carreras en base al parámetro nombre para filtrar
-rutas.get('/filtro/:nombre', (req, res) => {
-    var nombre = req.params.nombre; // Parametro necesario
+
+/* URL: http://localhost:8085/filtro/
+   Método: GET
+   Datos de entrada por Query param: nombre
+   Descripción: Ruta correspondiente a filtro, 
+   que permite desplegar las carreras en base al parámetro nombre,
+   para así filtrar una o más carreras que tienen nombres similares.
+*/
+rutas.get('/filtro/', (req, res) => {
+    var nombre = req.query.nombre; // Query Param necesario
     if(nombre){
         try{
             let filtrocarrera = []; // Se inicializa el arreglo tipo objeto, lo cual dada objeto representa las mismas variables que contiene una carrera en carreras.json
-            let nombre_normalizado = normalizeString(nombre).toUpperCase(); // Se limpia y normaliza el string en mayusculas
-            for(var i = 0; i<28; i++){
-                let nombre_carrera_normalizado = normalizeString(carreras[i].nombre_carrera).toUpperCase();
-                if(nombre_carrera_normalizado.includes(nombre_normalizado)){
+            let nombre_normalizado = normalizeString(nombre).toUpperCase(); // Se limpia y normaliza el string en mayusculas al nombre ingresado
+            for(var i = 0; i<28; i++){ // Se recorre las 28 carreras
+                let nombre_carrera_normalizado = normalizeString(carreras[i].nombre_carrera).toUpperCase(); // Se extrae, limpia y normaliza el string en mayusculas al nombre de la carrera
+                if(nombre_carrera_normalizado.includes(nombre_normalizado)){ // Se verifica que ambos nombres son parecidos, comparando el substring nombre y string nombre de la carrera.
                     filtrocarrera.push(carreras[i]);
                 }
             }
-            if(filtrocarrera){
+            if(filtrocarrera.length !== 0){
                 res.status(200).json(filtrocarrera);
             }
-            else{
-                res.status(412).json(({error: 'No se logró filtrar carreras.'}));
+            else{ // En caso de que la lista esté vacia
+                res.status(412).json(({error: 'No se logró filtrar alguna carrera.'}));
             }
         }
         catch{
@@ -123,12 +127,21 @@ rutas.get('/filtro/:nombre', (req, res) => {
     else{
         res.status(404).json(({error: 'No se encontró el parámetro requerido.'}));
     }
-    
 });
 
-// Ruta correspondiente a las 10 mejores opciones de elegir sobre las carreras ofrecidas por la UTEM
+
+/* URL: http://localhost:8085/mejoresopciones/
+   Método: POST
+   Datos de entrada por Request Body: "nem", "ranking", "lenguaje", "matematica", "ciencia" e "historia"
+   Descripción: Ruta correspondiente a las 10 mejores opciones de elegir 
+   sobre las carreras ofrecidas por la UTEM. Mientras se recorre los datos
+   de las 28, se ordena de mayor a menor puntaje. Una vez finalizado,
+   se ordena de acuerdo el lugar tentativo que se obtiene,
+   calculando (primer_matriculado - ultimo_matriculado)/vacantes
+   de cada carrera asignada en la lista de objetos.
+*/
 rutas.post('/mejoresopciones/', (req, res) => {
-    // Request body con datos necesarios
+    // Request body con datos de entrada necesarios
     var nem = req.body.nem;
     var ranking = req.body.ranking;
     var lenguaje = req.body.lenguaje;
@@ -138,16 +151,19 @@ rutas.post('/mejoresopciones/', (req, res) => {
     var listado_10_opciones = []; // Se inicializa una lista de tipo objeto, donde será ordenado de mayor a menor puntaje
     if(nem && ranking && lenguaje && matematica && ciencia && historia){ // Se verifica si se ha ingresado los datos.
         try{
-            let verificar = verificarpuntajes(nem, ranking, lenguaje, matematica, ciencia, historia); // Aqui se verifica si ha ingresado correctamente, retornando en true en el mejor de los casos.
-            if(!verificar){ // Se verifica si ha retornado falso, comprobando que hubo un error de ingreso.
+            let verificardatos = verificarpuntajes(nem, ranking, lenguaje, matematica, ciencia, historia); // Aqui se verifica si ha ingresado correctamente, retornando en true en el mejor de los casos.
+            if(!verificardatos){ // Se verifica si ha retornado falso, comprobando que hubo un error de ingreso.
                 res.status(400).json(({error: 'Datos ingresados no validos.'}));
             }
+            if((lenguaje+matematica)/2 < 450){ // Se verifica en caso de no cumplir con el promedio minimo
+                res.status(200).json(({mensaje: 'De acuerdo los puntajes que ingresó, no cumple el puntaje promedio minimo entre lenguaje y matemática que es 450.'}));
+            }
             for(let i = 0; i<28; i++){ // Se recorre las 28 carreras
-                let opcion = new Object(); // Se crea un objeto, que contendrá codigo, nombre, puntaje y lugar tentativa de una carrera.
-                opcion.codigo = carreras[i].codigo; // Se extrae el nombre de la carrera la cual se está analizando.
-                opcion.nombre_carrera = carreras[i].nombre_carrera; // Se extrae el nombre de la carrera.
-                opcion.puntaje = calculoponderacion(nem, ranking, lenguaje, matematica, ciencia, historia, carreras[i]); // Se calcula el puntaje final.
-                opcion.lugar_tentativo = (carreras[i].primer_matriculado - carreras[i].ultimo_matriculado)/carreras[i].vacantes; // Se calcula el lugar tentativo, donde el más cercano al 0 representa la mejor opcion.
+                let codigo = carreras[i].codigo; // Se extrae el nombre de la carrera la cual se está analizando.
+                let nombre_carrera = carreras[i].nombre_carrera; // Se extrae el nombre de la carrera.
+                let puntaje = calculoponderacion(nem, ranking, lenguaje, matematica, ciencia, historia, carreras[i]); // Se calcula el puntaje final.
+                let lugar_tentativo = (carreras[i].primer_matriculado - carreras[i].ultimo_matriculado)/carreras[i].vacantes; // Se calcula el lugar tentativo, donde el más cercano al 0 representa la mejor opcion.
+                let opcion = {codigo: codigo, nombre_carrera: nombre_carrera, puntaje: puntaje, lugar_tentativo: lugar_tentativo}; // Se crea un objeto, que contendrá codigo, nombre, puntaje y lugar tentativa de una carrera.
                 if(listado_10_opciones.length < 10){ // En caso de no haber llenado las 10 opciones de elegir las carreras.
                     listado_10_opciones.push(opcion); // Se ingresa el objeto a la lista.
                     ordenarpuntajes(listado_10_opciones); // Se ordena la lista cada vez que se ingrese el objeto.
@@ -163,7 +179,7 @@ rutas.post('/mejoresopciones/', (req, res) => {
                 }
             }
             listado_10_opciones.sort(function (a, b) { // Por ultimo, se vuelve a ordenar, ordenando de menor a mayor en base a lugar tentativo
-                if (a,lugar_tentativo > b.lugar_tentativo) { // Similar a la funcion ordenar, solamente que las condiciones son distintas o al reves
+                if (a.lugar_tentativo > b.lugar_tentativo) { // Similar a la funcion ordenar, solamente que las condiciones son distintas o al reves
                   return 1;
                 }
                 if (a.lugar_tentativo < b.lugar_tentativo) {
@@ -178,7 +194,7 @@ rutas.post('/mejoresopciones/', (req, res) => {
         }
     }
     else{
-        res.status(404).json(({error: 'No se ha ingresado los datos solicitados.'}));
+        res.status(404).json(({error: 'No se han ingresado los datos solicitados.'}));
     }
 });
 
