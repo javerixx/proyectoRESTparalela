@@ -11,7 +11,7 @@ _en caso de no ingresarla por defecto se despliega el listado de todas las_
 _carreras, que en total son 28._
 _La segunda funcionalidad consiste en desplegar una o más carreras de acuerdo_ 
 _el nombre que se ingresa como dato de entrada, es decir, filtrar los nombres_
-_y desplegar los que son similares.
+_y desplegar los que son similares._
 _Por último, la tercera funcionalidad consiste en desplegar las 10 mejores opciones_
 _para ingresar en esas carreras, lo cual en la ejecución se obtiene primero los 10_
 _mejores puntajes y tras terminar de recorrer las 28 carreras, se vuelve a ordenar_
