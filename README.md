@@ -6,7 +6,7 @@
 
 _Este proyecto consiste en levantar un servidor que sigue el protocolo REST,_ 
 _lo cual contiene tres funcionalidades distintas. La primera funcionalidad_
-_consiste en desplegar una carrera en especifico a partir del código de ello,
+_consiste en desplegar una carrera en especifico a partir del código de ello,_
 _en caso de no ingresarla por defecto se despliega el listado de todas las_
 _carreras, que en total son 28._
 _La segunda funcionalidad consiste en desplegar una o más carreras de acuerdo_ 
@@ -37,9 +37,9 @@ _1) Posicionarse en la carpeta o directorio del proyecto e ingresa el siguiente 
 ```
 npm run psu
 ```
-_2) Luego se debe abrir un navegador e ingresar el siguiente link,_
-   _con el fin de verificar su funcionamiento:_ 
-   **localhost:8085/carreras/**
+_2) Debe mostrar un mensaje "Abriendo servidor desde el puerto 8085". Luego, se debe abrir un navegador_ 
+   _e ingresar el siguiente link, con el fin de verificar su funcionamiento:_ 
+   **http://localhost:8085/carreras/**
 
 _Listo, el servidor ya se encuentra abierta y podrá ingresar datos_
 _de entrada con SOAPUI, Postman o otro similar, para realizar pruebas._
@@ -47,17 +47,17 @@ _de entrada con SOAPUI, Postman o otro similar, para realizar pruebas._
 ## Ejecutando las pruebas ⚙️
 
 _Para la primera funcionalidad, debe ingresar:
-* URL: **localhost:8085/carreras/**
+* URL: **http://localhost:8085/carreras/**
 * Método: **GET**
 * Query Param: codigo (el valor debe coincidir con cualquier código de carrera existente)
 
 _Para la segunda funcionalidad, debe ingresar:
-* URL: **localhost:8085/filtro/**
+* URL: **http://localhost:8085/filtro/**
 * Método: **GET**
 * Query Param: **nombre** (nombre similar de una o más carreras)
 
 _Para la tercera funcionalidad, debe ingresar:
-* URL: **localhost:8085/mejoresopciones/**
+* URL: **http://localhost:8085/mejoresopciones/**
 * Método: **POST**
 * Request Body: **nem**, **ranking**, **lenguaje**, **matematica**, **ciencia** e **historia** 
 
