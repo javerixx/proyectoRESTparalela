@@ -66,7 +66,7 @@ _Como señala la descripción, cada uno despliega resultados en formato JSON._
 ## Herramientas 🛠️
 
 * Visual Studio Code - Editor de código fuente.
-* [SOAPUI 5.0.0](https://www.soapui.org/downloads/soapui/) - Herramientas de prueba API, 
+* [SOAPUI 5.0.0](https://www.soapui.org/downloads/soapui/) - Herramientas de prueba API.
 * Postman - Herramientas de prueba API, como otra alternativa.
 
 ## Integrantes del proyecto ✒️
