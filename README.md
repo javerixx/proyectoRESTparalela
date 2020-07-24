@@ -46,17 +46,17 @@ _de entrada con SOAPUI, Postman o otro similar, para realizar pruebas._
 
 ## Ejecutando las pruebas ⚙️
 
-_Para la primera funcionalidad, debe ingresar:
+_Para la primera funcionalidad, debe ingresar:_
 * URL: **http://localhost:8085/carreras/**
 * Método: **GET**
 * Query Param: codigo (el valor debe coincidir con cualquier código de carrera existente)
 
-_Para la segunda funcionalidad, debe ingresar:
+_Para la segunda funcionalidad, debe ingresar:_
 * URL: **http://localhost:8085/filtro/**
 * Método: **GET**
 * Query Param: **nombre** (nombre similar de una o más carreras)
 
-_Para la tercera funcionalidad, debe ingresar:
+_Para la tercera funcionalidad, debe ingresar:_
 * URL: **http://localhost:8085/mejoresopciones/**
 * Método: **POST**
 * Request Body: **nem**, **ranking**, **lenguaje**, **matematica**, **ciencia** e **historia** 
