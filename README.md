@@ -73,5 +73,5 @@ _Como señala la descripción, cada uno despliega resultados en formato JSON._
 
 * **Sebastián Garrido Valenzuela** - [Sebastron](https://github.com/Sebastron)
 * **Ramiro Uribe Garrido** - [RamiroUribe](https://github.com/RamiroUribe)
-* **Javier Gálvez González** - [RamiroUribe](https://github.com/RamiroUribe)
+* **Javier Gálvez González** - [javerix](https://github.com/javerix)
 
