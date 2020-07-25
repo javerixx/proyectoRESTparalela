@@ -20,7 +20,9 @@ _a ultima opción para postular en dicha carrera. Para esta funcionalidad se req
 _ingresar los puntajes los cuales son el nem, ranking, lenguaje, matemática, ciencia_
 _e historia, cabe señalar que deben ingresar los valores que estén entre 150 y 850,_
 _sea un entero o decimal, de lo contrario los datos ingresados no serán invalidas._
-_Todos los resultados son desplegatos en formato JSON._
+_Todos los resultados son desplegatos en formato JSON. Este proyecto está creado_
+_para el sistema operativo Ubuntu, sin embargo puede también funcionar otros sistemas_
+_operativos pero los comandos y forma de instalación de herramientas pueden cambiar._ 
 
 ### Requisitos 📋
 
