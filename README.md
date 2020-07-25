@@ -43,6 +43,10 @@ _2) Debe mostrar un mensaje "Abriendo servidor desde el puerto 8085". Luego, se 
 
 _Listo, el servidor ya se encuentra abierta y podrá ingresar datos_
 _de entrada con SOAPUI, Postman o otro similar, para realizar pruebas._
+_En caso de quiera cerrar el puerto 8085 y no se pueda por salir de la ejecución, se debe ingresar el siguiente comando:_
+```
+fuser -k 8085/tcp
+```
 
 ## Ejecutando las pruebas ⚙️
 
