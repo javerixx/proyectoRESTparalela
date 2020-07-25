@@ -28,14 +28,14 @@ _operativos pero los comandos y forma de instalación de herramientas pueden cam
 
 * Tener instalado NodeJs, cuya versión utilizada es 10.19.0. Se podrá instalar ingresando el siguiente comando en el terminal:
 ```
-sudo apt npm install
+sudo apt install npm
 ```
 
 ### Ejecución del programa 🔧
 
 _Para ejecutar el programa, se debe seguir los siguientes pasos manualmente:_
 
-_1) Posicionarse en la carpeta o directorio del proyecto e ingresa el siguiente comando para ejecutar el servidor:_
+_1) Desde una terminal, debe posicionar en la carpeta o directorio del proyecto e ingresa el siguiente comando para ejecutar el servidor:_
 ```
 npm run psu
 ```

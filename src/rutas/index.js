@@ -174,7 +174,16 @@ rutas.post('/mejoresopciones/', (req, res) => {
                         listado_10_opciones[listado_10_opciones.length - 1].nombre_carrera = opcion.nombre_carrera;
                         listado_10_opciones[listado_10_opciones.length - 1].puntaje = opcion.puntaje;
                         listado_10_opciones[listado_10_opciones.length - 1].lugar_tentativo = opcion.lugar_tentativo;
-                        ordenarpuntajes(listado_10_opciones); // Se ordnea la lista cada vez que se ingrese 
+                        ordenarpuntajes(listado_10_opciones); // Se ordena la lista cada vez que se ingrese 
+                    }
+                    else{ // En caso que el puntaje en analisis es igual al puntaje de la ultima opcion, y que el lugar tentativo de la opción analizada sea mejor.
+                        if((opcion.puntaje == listado_10_opciones[listado_10_opciones.length - 1].puntaje) && (opcion.lugar_tentativo < listado_10_opciones[listado_10_opciones.length - 1].lugar_tentativo)){ 
+                            listado_10_opciones[listado_10_opciones.length - 1].codigo = opcion.codigo;
+                            listado_10_opciones[listado_10_opciones.length - 1].nombre_carrera = opcion.nombre_carrera;
+                            listado_10_opciones[listado_10_opciones.length - 1].puntaje = opcion.puntaje;
+                            listado_10_opciones[listado_10_opciones.length - 1].lugar_tentativo = opcion.lugar_tentativo;
+                            ordenarpuntajes(listado_10_opciones); // Se ordena la lista cada vez que se ingrese 
+                        }
                     }
                 }
             }
@@ -198,4 +207,4 @@ rutas.post('/mejoresopciones/', (req, res) => {
     }
 });
 
-module.exports = rutas;
+ module.exports = rutas;
