@@ -90,6 +90,7 @@ _**NOTA: Para el caso de Request body, se debe ingresar los nombres y asignar va
 * Visual Studio Code - Editor de código fuente.
 * [SOAPUI 5.0.0](https://www.soapui.org/downloads/soapui/) - Herramientas de prueba API.
 * Postman - Herramientas de prueba API, como otra alternativa.
+* [NodeJs](https://nodejs.org/es/) - Entorno de ejecución para JavaScript 
 
 ## Integrantes del proyecto ✒️
 
