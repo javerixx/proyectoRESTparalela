@@ -35,7 +35,7 @@ sudo apt install npm
 
 _Para ejecutar el programa, se debe seguir los siguientes pasos manualmente:_
 
-_1) Desde una terminal, debe posicionar en la carpeta o directorio del proyecto e ingresa el siguiente comando para ejecutar el servidor:_
+_1) Desde una terminal, debe posicionar en la carpeta o directorio del proyecto, e ingresar el siguiente comando para ejecutar el servidor:_
 ```
 npm run psu
 ```
