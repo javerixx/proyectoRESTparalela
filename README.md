@@ -54,7 +54,7 @@ fuser -k 8085/tcp
 ## Ejecutando las pruebas ⚙️
 
 _Antes de probar con SOAPUI, Postman o otro similar, se debe ingresar en el header el token de autorización de JWT,_
-_con el nombre de "Authorization", y así podrán realizar pruebas en las tres funcionalidades_
+_con el nombre de "Authorization", y así podrán realizar pruebas en las tres funcionalidades._
 
 _Para la primera funcionalidad, debe ingresar:_
 * URL: **http://localhost:8085/carreras/**
