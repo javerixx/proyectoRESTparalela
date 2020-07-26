@@ -40,7 +40,8 @@ _1) Desde una terminal, debe posicionar en la carpeta o directorio del proyecto 
 npm run psu
 ```
 _2) Debe mostrar un mensaje "Abriendo servidor desde el puerto 8085". Luego, se debe abrir un navegador_ 
-   _e ingresar el siguiente link, con el fin de verificar su funcionamiento:_ 
+   _e ingresar el siguiente link, con el fin de verificar su funcionamiento. Debe mostrar un mensaje de_
+   _error, lo cual consiste en que se niega el acceso al servidor:_ 
    **http://localhost:8085/carreras/**
 
 _Listo, el servidor ya se encuentra abierta y podrá ingresar datos_
@@ -51,6 +52,9 @@ fuser -k 8085/tcp
 ```
 
 ## Ejecutando las pruebas ⚙️
+
+_Antes de probar con SOAPUI, Postman o otro similar, se debe ingresar en el header el token de autorización de JWT,_
+_con el nombre de "Authorization", y así podrán realizar pruebas en las tres funcionalidades_
 
 _Para la primera funcionalidad, debe ingresar:_
 * URL: **http://localhost:8085/carreras/**
