@@ -72,6 +72,18 @@ _Para la tercera funcionalidad, debe ingresar:_
 * Request Body: **nem**, **ranking**, **lenguaje**, **matematica**, **ciencia** e **historia** 
 
 _Como señala la descripción, cada uno despliega resultados en formato JSON._
+_**NOTA: Para el caso de Request body, se debe ingresar los nombres y asignar valores en formato JSON, de esta forma:**_
+
+```
+{
+   "nem": [valor],
+   "ranking": [valor],
+   "lenguaje": [valor],
+   "matematica": [valor],
+   "ciencia": [valor],
+   "historia": [valor]
+}
+```
 
 ## Herramientas 🛠️
 
