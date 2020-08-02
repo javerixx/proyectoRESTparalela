@@ -41,7 +41,21 @@ function ordenarpuntajes(x){
     });
 }
 
-// 4) Funcion que verifica si los puntajes que el usuario ingresa desde cliente son correctos.
+// 4) Funcion donde ordena una lista de objetos en base a los lugares tentativos de las carreras.
+// Cada objeto contiene 4 atributos, los cuales son codigo, nombre, puntaje y lugar tentativo de una carrera.
+function ordenarlugartentativo(x){
+    x.sort(function (a, b) { // La lista estará ordena de menor a mayor en base a lugar tentativo
+        if (a.lugar_tentativo > b.lugar_tentativo) { // Similar a la funcion ordenar, solamente que las condiciones son distintas o al reves
+          return 1;
+        }
+        if (a.lugar_tentativo < b.lugar_tentativo) {
+          return -1;
+        }
+        return 0;
+    });
+}
+
+// 5) Funcion que verifica si los puntajes que el usuario ingresa desde cliente son correctos.
 function verificarpuntajes(nem, ranking, lenguaje, matematica, ciencia, historia){
     // La condición de aqui abajo pregunta si los tipos de datos ingresados no son de tipo Number, sea entero o decimal. 
     if(typeof nem !== 'number' && typeof ranking !== 'number' && typeof lenguaje === 'number' && typeof matematica === 'number' && typeof ciencia === 'number' && typeof historia === 'number'){
@@ -103,7 +117,7 @@ rutas.get('/carreras/', (req, res) => {
 */
 rutas.get('/filtro/', (req, res) => {
     var nombre = req.query.nombre; // Query Param necesario
-    if(nombre){
+    if(nombre){ // Se verifica si se ha ingresado algo
         try{
             let filtrocarrera = []; // Se inicializa el arreglo tipo objeto, lo cual dada objeto representa las mismas variables que contiene una carrera en carreras.json
             let nombre_normalizado = normalizeString(nombre).toUpperCase(); // Se limpia y normaliza el string en mayusculas al nombre ingresado
@@ -116,7 +130,7 @@ rutas.get('/filtro/', (req, res) => {
             if(filtrocarrera.length !== 0){
                 res.status(200).json(filtrocarrera);
             }
-            else{ // En caso de que la lista esté vacia
+            else{ // En caso de que la lista esté vacia, es decir, no ha coincidido en ningún nombre
                 res.status(412).json(({error: 'No se logró filtrar alguna carrera.'}));
             }
         }
@@ -124,8 +138,8 @@ rutas.get('/filtro/', (req, res) => {
             res.status(412).json(({error: 'Error inesperado.'}));
         }
     }
-    else{
-        res.status(404).json(({error: 'No se encontró el parámetro requerido.'}));
+    else{ // Por defecto, se despliega todas las carreras existente
+        res.status(200).json(carreras);
     }
 });
 
@@ -182,20 +196,13 @@ rutas.post('/mejoresopciones/', (req, res) => {
                             listado_10_opciones[listado_10_opciones.length - 1].nombre_carrera = opcion.nombre_carrera;
                             listado_10_opciones[listado_10_opciones.length - 1].puntaje = opcion.puntaje;
                             listado_10_opciones[listado_10_opciones.length - 1].lugar_tentativo = opcion.lugar_tentativo;
-                            ordenarpuntajes(listado_10_opciones); // Se ordena la lista cada vez que se ingrese 
+                            ordenarlugartentativo(listado_10_opciones); // Primero se ordena la lista por lugar tentativo, en caso de haber otros puntajes iguales.
+                            ordenarpuntajes(listado_10_opciones); // Luego, se ordena la lista por puntajes, pero con lugares tentativos ya ordenados.
                         }
                     }
                 }
             }
-            listado_10_opciones.sort(function (a, b) { // Por ultimo, se vuelve a ordenar, ordenando de menor a mayor en base a lugar tentativo
-                if (a.lugar_tentativo > b.lugar_tentativo) { // Similar a la funcion ordenar, solamente que las condiciones son distintas o al reves
-                  return 1;
-                }
-                if (a.lugar_tentativo < b.lugar_tentativo) {
-                  return -1;
-                }
-                return 0;
-            });
+            ordenarlugartentativo(listado_10_opciones); // Por ultimo, se vuelve a ordenar, ordenando de menor a mayor en base a lugar tentativo
             res.status(200).json(listado_10_opciones);
         }
         catch{
