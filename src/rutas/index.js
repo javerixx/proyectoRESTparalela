@@ -70,8 +70,8 @@ function verificarpuntajes(nem, ranking, lenguaje, matematica, ciencia, historia
         if(ranking >= 150 && ranking <= 850){
             if(lenguaje >= 150 && lenguaje <= 850){
                 if(matematica >= 150 && matematica <= 850){
-                    if((ciencia >= 150 && ciencia <= 850) || ciencia == 0){
-                        if((historia >= 150 && historia <= 850) || historia == 0){
+                    if((ciencia >= 150 && ciencia <= 850) || (ciencia == 0)){
+                        if((historia >= 150 && historia <= 850) || (historia == 0)){
                             return true;
                         } 
                     } 
@@ -167,11 +167,17 @@ rutas.post('/mejoresopciones/', (req, res) => {
     var ciencia = req.body.ciencia; 
     var historia = req.body.historia; 
     var listado_10_opciones = []; // Se inicializa una lista de tipo objeto, donde será ordenado de mayor a menor puntaje
-    if(nem && ranking && lenguaje && matematica && ciencia && historia){ // Se verifica si se ha ingresado los datos.
+    if(nem && ranking && lenguaje && matematica){ // Se verifica si se ha ingresado los datos.
         try{
+            if(!historia){ // En caso de no ser ingresado
+                historia = 0;
+            }
+            if(!ciencia){ // En caso de no ser ingresado
+                ciencia = 0;
+            }
             let verificardatos = verificarpuntajes(nem, ranking, lenguaje, matematica, ciencia, historia); // Aqui se verifica si ha ingresado correctamente, retornando en true en el mejor de los casos.
             if(!verificardatos){ // Se verifica si ha retornado falso, comprobando que hubo un error de ingreso.
-                res.status(400).json(({error: 'Datos ingresados no validos.'}));
+                res.status(400).json(({error: 'Datos ingresados no validos o no has ingresado algún dato.'}));
             }
             if((lenguaje+matematica)/2 < 450){ // Se verifica en caso de no cumplir con el promedio minimo
                 res.status(200).json(({mensaje: 'De acuerdo los puntajes que ingresó, no cumple el puntaje promedio minimo entre lenguaje y matemática que es 450.'}));

@@ -20,8 +20,8 @@ _a ultima opción para postular en dicha carrera. Para esta funcionalidad se req
 _ingresar los puntajes los cuales son el nem, ranking, lenguaje, matemática, ciencia_
 _e historia, cabe señalar que deben ingresar los valores que estén entre 150 y 850,_
 _sea un entero o decimal, de lo contrario los datos ingresados no serán invalidas._
-_En caso de no dar la PSU de historia o ciencia, se debe ingresar un 0, sin embargo_
-_al ingresar 0 en ambos puntajes no serán validos._
+_En caso de no dar la PSU de historia o ciencia, se debe ingresar un 0 o no ingresar nada,
+_sin embargo, al ingresar 0 o nada en ambos puntajes no serán validos._
 _Todos los resultados son desplegatos en formato JSON. Este proyecto está creado_
 _para el sistema operativo Ubuntu, sin embargo puede también funcionar otros sistemas_
 _operativos pero los comandos y forma de instalación de herramientas pueden cambiar._ 
