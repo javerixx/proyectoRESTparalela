@@ -61,13 +61,17 @@ function verificarpuntajes(nem, ranking, lenguaje, matematica, ciencia, historia
     if(typeof nem !== 'number' && typeof ranking !== 'number' && typeof lenguaje === 'number' && typeof matematica === 'number' && typeof ciencia === 'number' && typeof historia === 'number'){
         return false;
     }
+    // En caso de que estos dos puntajes son ingresados a 0
+    if(ciencia == 0 && historia == 0){
+        return false;
+    }
     // Se comprueba si se cumple todos el intervalo entre 150 y 850. 
     if(nem >= 150 && nem <= 850){
         if(ranking >= 150 && ranking <= 850){
             if(lenguaje >= 150 && lenguaje <= 850){
                 if(matematica >= 150 && matematica <= 850){
-                    if(ciencia >= 150 && ciencia <= 850){
-                        if(historia >= 150 && historia <= 850){
+                    if((ciencia >= 150 && ciencia <= 850) || ciencia == 0){
+                        if((historia >= 150 && historia <= 850) || historia == 0){
                             return true;
                         } 
                     } 
