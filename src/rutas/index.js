@@ -180,7 +180,7 @@ rutas.post('/mejoresopciones/', (req, res) => {
                 res.status(412).json(({error: 'Datos ingresados no validos o no has ingresado algún dato.'}));
             }
             if((lenguaje+matematica)/2 < 450){ // Se verifica en caso de no cumplir con el promedio minimo
-                res.status(200).json(({mensaje: 'De acuerdo los puntajes que ingresó, no cumple el puntaje promedio minimo entre lenguaje y matemática que es 450.'}));
+                res.status(200).json(({mensaje: 'De acuerdo los puntajes que ingresó, no cumple con el puntaje promedio minimo entre lenguaje y matemática que es 450.'}));
             }
             for(let i = 0; i<28; i++){ // Se recorre las 28 carreras
                 let codigo = carreras[i].codigo; // Se extrae el nombre de la carrera la cual se está analizando.
