@@ -45,10 +45,10 @@ function ordenarpuntajes(x){
 // Cada objeto contiene 4 atributos, los cuales son codigo, nombre, puntaje y lugar tentativo de una carrera.
 function ordenarlugartentativo(x){
     x.sort(function (a, b) { // La lista estará ordena de menor a mayor en base a lugar tentativo
-        if (a.lugar_tentativo > b.lugar_tentativo) { // Similar a la funcion ordenar, solamente que las condiciones son distintas o al reves
+        if (a.lugar_tentativo < b.lugar_tentativo) { // Similar a la funcion ordenar, solamente que las condiciones son distintas o al reves
           return 1;
         }
-        if (a.lugar_tentativo < b.lugar_tentativo) {
+        if (a.lugar_tentativo > b.lugar_tentativo) {
           return -1;
         }
         return 0;
