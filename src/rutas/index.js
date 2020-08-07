@@ -30,11 +30,11 @@ function calculoponderacion(nem, ranking, lenguaje, matematica, ciencia, histori
 // Cada objeto contiene 4 atributos, los cuales son codigo, nombre, puntaje y lugar tentativo de una carrera.
 function ordenarpuntajes(x){
     x.sort(function (a, b) { // Se ordena Mayor a menor de acuerdo a puntajes finales obtenidos en cada carrera
-        if (a.puntaje > b.puntaje) {
-          return 1; // Si la condición se cumple, se sitúa "a" en un indice menor que "b". Es decir, "a" viene primero.
-        }
         if (a.puntaje < b.puntaje) {
-          return -1; // Si la condición se cumple, se sitúa "b" en un indice menor que "a". Es decir, "b" viene primero.
+          return 1; // Si la condición se cumple, se sitúa "a" en un indice menor que "b". Es decir, "b" viene primero.
+        }
+        if (a.puntaje > b.puntaje) {
+          return -1; // Si la condición se cumple, se sitúa "b" en un indice menor que "a". Es decir, "a" viene primero.
         }
         // En caso que a y b son iguales, no habrá cambios de indice.
         return 0;
@@ -45,10 +45,10 @@ function ordenarpuntajes(x){
 // Cada objeto contiene 4 atributos, los cuales son codigo, nombre, puntaje y lugar tentativo de una carrera.
 function ordenarlugartentativo(x){
     x.sort(function (a, b) { // La lista estará ordena de menor a mayor en base a lugar tentativo
-        if (a.lugar_tentativo < b.lugar_tentativo) { // Similar a la funcion ordenar, solamente que las condiciones son distintas y al reves
+        if (a.lugar_tentativo > b.lugar_tentativo) { // Similar a la funcion ordenar, solamente que las condiciones son distintas y al reves
           return 1;
         }
-        if (a.lugar_tentativo > b.lugar_tentativo) {
+        if (a.lugar_tentativo < b.lugar_tentativo) {
           return -1;
         }
         return 0;
