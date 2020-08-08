@@ -58,7 +58,7 @@ function ordenarlugartentativo(x){
 // 5) Funcion que verifica si los puntajes que el usuario ingresa desde cliente son correctos.
 function verificarpuntajes(nem, ranking, lenguaje, matematica, ciencia, historia){
     // La condición de aqui abajo pregunta si los tipos de datos ingresados no son de tipo Number, sea entero o decimal. 
-    if(typeof nem !== 'number' && typeof ranking !== 'number' && typeof lenguaje === 'number' && typeof matematica === 'number' && typeof ciencia === 'number' && typeof historia === 'number'){
+    if(typeof nem !== 'number' && typeof ranking !== 'number' && typeof lenguaje !== 'number' && typeof matematica !== 'number' && typeof ciencia !== 'number' && typeof historia !== 'number'){
         return false;
     }
     // En caso de que estos dos puntajes son ingresados a 0
