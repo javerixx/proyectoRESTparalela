@@ -1,6 +1,6 @@
 # Título del Proyecto
 
-**_Proyecto REST, PSU_**
+**_Proyecto SERVIDOR REST, PSU_**
 
 ## Descripción 🚀
 
